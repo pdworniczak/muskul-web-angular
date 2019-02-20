@@ -4,12 +4,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UserService {
-
-  constructor() { }
+  constructor() {}
 
   login() {
     console.log('login');
-
 
     return true;
   }
