@@ -22,8 +22,12 @@ const routes: Routes = [
     component: NavigationComponent
   },
   {
+    path: 'register',
+    redirectTo: 'app'
+  },
+  {
     path: '**',
-    redirectTo: 'login'
+    redirectTo: 'app'
   }
 ];
 

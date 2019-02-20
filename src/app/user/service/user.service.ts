@@ -11,4 +11,8 @@ export class UserService {
 
     return true;
   }
+
+  logout() {
+    console.log('logout');
+  }
 }
