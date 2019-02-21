@@ -12,7 +12,7 @@ import { UserService } from './users/services/user.service';
 import { NavigationComponent } from './routes/components/navigation/navigation.component';
 import RoutesModule from './routes/routes';
 import { CommingSoonComponent } from './common/components/comming-soon/comming-soon.component';
-import { NotFound404Component } from './common/components/not-found404/not-found404.component';
+import { PageNotFoundComponent } from './common/components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { NotFound404Component } from './common/components/not-found404/not-found
     ListComponent,
     NavigationComponent,
     CommingSoonComponent,
-    NotFound404Component
+    PageNotFoundComponent
   ],
   imports: [
     RoutesModule,
