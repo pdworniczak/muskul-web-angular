@@ -11,13 +11,17 @@ import { environment } from '../environments/environment';
 import { UserService } from './user/services/user.service';
 import { NavigationComponent } from './route/components/navigation/navigation.component';
 import RoutesModule from './route/routes';
+import { CommingSoonComponent } from './common/components/comming-soon/comming-soon.component';
+import { NotFound404Component } from './common/components/not-found404/not-found404.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ListComponent,
-    NavigationComponent
+    NavigationComponent,
+    CommingSoonComponent,
+    NotFound404Component
   ],
   imports: [
     RoutesModule,
