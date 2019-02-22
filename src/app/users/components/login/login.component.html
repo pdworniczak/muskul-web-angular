@@ -1,10 +1,15 @@
 <section>
-  <mat-form-field>
-    <input matInput placeholder="email">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="password">
-  </mat-form-field>
-  <button mat-raised-button (click)="login()">Login</button>
-  <button mat-raised-button (click)="register()">Register</button>
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <mat-form-field>
+      <input matInput formControlName="email" placeholder="email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" formControlName="password" placeholder="password">
+    </mat-form-field>
+    <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Login</button>
+    <button mat-raised-button (click)="register()">Register</button>
+  </form>
+  {{ loginForm.value | json }}
+  {{ loginForm.valid }}
+  {{ loginForm.status }}
 </section>
