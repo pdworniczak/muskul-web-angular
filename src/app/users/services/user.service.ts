@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { Login } from '../login';
 
@@ -17,10 +18,14 @@ export class UserService {
   login(): Observable<Login> {
     const loginObservable: Observable<Login> = of(sampleLoginResponse);
 
-    return loginObservable;
+    return loginObservable.pipe(delay(1000));
   }
 
   logout() {
     console.log('logout');
+  }
+
+  isAuthenticated(): Observable<boolean> {
+    return of(true).pipe(delay(1000));
   }
 }

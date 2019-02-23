@@ -1,5 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 
+import { ROUTES } from './routes.enum';
+import { AuthGuard } from './guards/auth.guard';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LoginComponent } from '../users/components/login/login.component';
 import { CommingSoonComponent } from '../common/components/comming-soon/comming-soon.component';
@@ -8,19 +10,20 @@ import { PageNotFoundComponent } from '../common/components/page-not-found/page-
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: ROUTES.LOGIN,
     pathMatch: 'full'
   },
   {
-    path: 'login',
+    path: ROUTES.LOGIN,
     component: LoginComponent
   },
   {
-    path: 'app',
-    component: NavigationComponent
+    path: ROUTES.APP,
+    component: NavigationComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path: 'register',
+    path: ROUTES.REGISTER,
     component: CommingSoonComponent
   },
   {
