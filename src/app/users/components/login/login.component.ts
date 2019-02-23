@@ -25,10 +25,8 @@ export class LoginComponent {
 
   login() {
     this.userService.login().subscribe({
-      next: (data: Login) => console.log(data),
-      complete: () => {
-        console.log('login successfull');
-        console.log(JSON.stringify(this.loginForm.value));
+      next: (data: Login) => {
+        localStorage.setItem('token', data.token);
         this.router.navigate([`/${ROUTES.APP}`]);
       }
     });
@@ -39,7 +37,6 @@ export class LoginComponent {
   }
 
   register() {
-    console.log(ROUTES.REGISTER);
     this.router.navigate([`/${ROUTES.REGISTER}`]);
   }
 }
