@@ -18,22 +18,21 @@ export class LoginComponent {
     private formBuilder: FormBuilder
   ) {}
 
+  loading = false;
+
   loginForm = this.formBuilder.group({
     email: ['', Validators.compose([Validators.email, Validators.required])],
     password: ['', Validators.required]
   });
 
   login() {
+    this.loading = true;
     this.userService.login().subscribe({
       next: (data: Login) => {
         localStorage.setItem('token', data.token);
         this.router.navigate([`/${ROUTES.APP}`]);
       }
     });
-  }
-
-  logout() {
-    this.userService.logout();
   }
 
   register() {
