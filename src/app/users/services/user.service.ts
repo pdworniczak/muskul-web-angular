@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { Login } from '../login';
+import { LocalStorageService } from '../../common/services/local-storage.service';
+import { ROUTES } from '../../routes/routes.enum';
 
 const sampleLoginResponse: Login = {
   logged: true,
@@ -13,16 +16,25 @@ const sampleLoginResponse: Login = {
   providedIn: 'root'
 })
 export class UserService {
-  constructor() {}
+  constructor(
+    private router: Router,
+    private localStorageService: LocalStorageService
+  ) {}
 
-  login(): Observable<Login> {
+  login() {
     const loginObservable: Observable<Login> = of(sampleLoginResponse);
 
-    return loginObservable.pipe(delay(1000));
+    loginObservable.pipe(delay(1000)).subscribe({
+      next: (data: Login) => {
+        this.localStorageService.login(data.token);
+        this.router.navigate([`/${ROUTES.APP}`]);
+      }
+    });
   }
 
   logout() {
-    console.log('logout');
+    this.localStorageService.logout();
+    this.router.navigate(['/']);
   }
 
   isAuthenticated(): Observable<boolean> {

@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { UserService } from '../../services/user.service';
 import { ROUTES } from '../../../routes/routes.enum';
-import { Login } from '../../login';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +12,6 @@ import { Login } from '../../login';
 export class LoginComponent {
   constructor(
     private userService: UserService,
-    private router: Router,
     private formBuilder: FormBuilder
   ) {}
 
@@ -27,15 +24,10 @@ export class LoginComponent {
 
   login() {
     this.loading = true;
-    this.userService.login().subscribe({
-      next: (data: Login) => {
-        localStorage.setItem('token', data.token);
-        this.router.navigate([`/${ROUTES.APP}`]);
-      }
-    });
+    this.userService.login();
   }
 
   register() {
-    this.router.navigate([`/${ROUTES.REGISTER}`]);
+    // this.router.navigate([`/${ROUTES.REGISTER}`]);
   }
 }
