@@ -10,21 +10,22 @@ import { PageNotFoundComponent } from '../common/components/page-not-found/page-
 const routes: Routes = [
   {
     path: '',
-    redirectTo: ROUTES.LOGIN,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    redirectTo: ROUTES.LOGIN
   },
   {
     path: ROUTES.LOGIN,
     component: LoginComponent
   },
   {
-    path: ROUTES.APP,
-    component: NavigationComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: ROUTES.REGISTER,
     component: CommingSoonComponent
+  },
+  {
+    path: ROUTES.APP,
+    component: NavigationComponent,
+
+    canActivate: [AuthGuard]
   },
   {
     path: '**',
