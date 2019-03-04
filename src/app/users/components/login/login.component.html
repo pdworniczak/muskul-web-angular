@@ -7,8 +7,8 @@
       <input matInput type="password" formControlName="password" placeholder="password">
     </mat-form-field>
     <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Login</button>
-    <button mat-raised-button (click)="register()">Register</button>
   </form>
+  <button mat-raised-button (click)="register()">Register</button>
   {{ loginForm.value | json }}
   {{ loginForm.valid }}
   {{ loginForm.status }}

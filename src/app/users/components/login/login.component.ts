@@ -28,6 +28,7 @@ export class LoginComponent {
   }
 
   register() {
+    console.log('Register!');
     // this.router.navigate([`/${ROUTES.REGISTER}`]);
   }
 }
