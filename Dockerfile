@@ -1,0 +1,9 @@
+FROM node:10
+
+WORKDIR /app
+USER node
+# ENV PORT 4200
+
+EXPOSE 4200
+
+ENTRYPOINT /bin/bash
