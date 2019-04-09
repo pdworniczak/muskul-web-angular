@@ -4,6 +4,7 @@ import { ROUTES } from './routes.enum';
 import { AuthGuard } from './guards/auth.guard';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LoginComponent } from '../users/components/login/login.component';
+import { ListComponent } from '../pushups/components/list/list.component';
 import { CommingSoonComponent } from '../common/components/comming-soon/comming-soon.component';
 import { PageNotFoundComponent } from '../common/components/page-not-found/page-not-found.component';
 
@@ -24,6 +25,12 @@ const routes: Routes = [
   {
     path: ROUTES.APP,
     component: NavigationComponent,
+
+    canActivate: [AuthGuard]
+  },
+  {
+    path: ROUTES.LIST,
+    component: ListComponent,
 
     canActivate: [AuthGuard]
   },

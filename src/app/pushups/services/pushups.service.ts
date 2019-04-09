@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import pushups from '../pushups.json';
 
 @Injectable({
   providedIn: 'root'
@@ -7,13 +8,7 @@ export class PushupsService {
 
   constructor() { }
 
-  data = [
-    {
-      type: 'best',
-      value: 20
-    },
-    {
-      
-    }
-  ]
+  getPushups() {
+    return JSON.stringify(pushups);
+  }
 }
