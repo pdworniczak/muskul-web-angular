@@ -2,5 +2,6 @@ export enum ROUTES {
   LOGIN = 'login',
   REGISTER = 'register',
   APP = 'app',
-  LIST = 'list'
+  LIST = 'list',
+  ADD = 'add'
 }

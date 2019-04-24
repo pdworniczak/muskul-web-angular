@@ -19,6 +19,7 @@ import RoutesModule from './routes/routes';
 import { CommingSoonComponent } from './common/components/comming-soon/comming-soon.component';
 import { PageNotFoundComponent } from './common/components/page-not-found/page-not-found.component';
 import { LoaderComponent } from './common/components/loader/loader.component';
+import { AddComponent } from './pushups/components/add/add.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoaderComponent } from './common/components/loader/loader.component';
     NavigationComponent,
     CommingSoonComponent,
     PageNotFoundComponent,
-    LoaderComponent
+    LoaderComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,

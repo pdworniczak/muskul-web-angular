@@ -2,8 +2,7 @@ FROM node:10
 
 WORKDIR /app
 USER node
-# ENV PORT 4200
+
+RUN yarn global add @angular/cli
 
 EXPOSE 4200
-
-ENTRYPOINT /bin/bash
