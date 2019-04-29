@@ -9,4 +9,12 @@ describe('PushupsService', () => {
     const service: PushupsService = TestBed.get(PushupsService);
     expect(service).toBeTruthy();
   });
+
+  it('get pushups', () => {
+    expect(null).toBeTruthy();
+  })
+
+  it('get pushups aa', () => {
+    expect(false).toBeTruthy();
+  })
 });
