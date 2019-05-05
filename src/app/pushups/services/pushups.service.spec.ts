@@ -14,12 +14,12 @@ describe('PushupsService', () => {
   it('get pushups', () => {
     const service: PushupsService = TestBed.get(PushupsService);
 
-    expect(service.getPushups()['31-35'][2][4]).toBe(13);
+    expect(service.getPushupsPlan()['31-35'][2][4]).toBe(13);
   })
 
   it('get last training', () => {
     const service: PushupsService = TestBed.get(PushupsService);
 
-    expect(service.getPushups()['31-35'][2][4]).toBe(13);
+    expect(service.getPushupsPlan()['31-35'][2][4]).toBe(13);
   })
 });

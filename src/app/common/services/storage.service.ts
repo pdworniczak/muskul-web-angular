@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+const TOKEN = 'token';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -7,14 +9,14 @@ export class StorageService {
   constructor() {}
 
   login(token) {
-    sessionStorage.setItem('token', token);
+    sessionStorage.setItem(TOKEN, token);
   }
 
   logout() {
-    sessionStorage.removeItem('token');
+    sessionStorage.removeItem(TOKEN);
   }
 
   getUserToken(): string {
-    return sessionStorage.getItem('token');
+    return sessionStorage.getItem(TOKEN);
   }
 }

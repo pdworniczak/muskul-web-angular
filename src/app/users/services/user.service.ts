@@ -9,24 +9,24 @@ import { ROUTES } from '../../routes/routes.enum';
 
 const sampleLoginResponse: Login = {
   logged: true,
-  token: 'xyz'
+  token: 'token1'
 };
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  constructor(private router: Router, private storageService: StorageService) {}
+  constructor(private router: Router, private storageService: StorageService) { }
 
   login() {
-    const loginObservable: Observable<Login> = of(sampleLoginResponse);
-
-    loginObservable.pipe(delay(1000)).subscribe({
-      next: (data: Login) => {
-        this.storageService.login(data.token);
-        this.router.navigate([`/${ROUTES.APP}`]);
-      }
-    });
+    of(sampleLoginResponse)
+      .pipe(delay(1000))
+      .subscribe({
+        next: (data: Login) => {
+          this.storageService.login(data.token);
+          this.router.navigate([`/${ROUTES.APP}`]);
+        }
+      });
   }
 
   logout() {
