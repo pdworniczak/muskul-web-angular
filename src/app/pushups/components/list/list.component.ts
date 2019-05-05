@@ -10,7 +10,6 @@ import { PushupsService } from '../../services/pushups.service';
 export class ListComponent implements OnInit {
 
   pushups = null;
-  test = 'TEST';
 
   constructor(private pushupsService: PushupsService) { }
 

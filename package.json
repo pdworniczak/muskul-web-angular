@@ -29,13 +29,14 @@
     "@angular/service-worker": "~7.2.0",
     "core-js": "^2.5.4",
     "j": "^1.0.0",
+    "moment": "^2.24.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
-    "@angular/cli": "~7.3.0",
+    "@angular/cli": "^7.3.8",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
     "@types/jasmine": "~2.8.8",
