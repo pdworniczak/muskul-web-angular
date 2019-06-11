@@ -3,7 +3,7 @@ import { Test, Training, Scope } from "../training";
 const mockData: { [token: string]: { trainings: Array<Training | Test> } } = {
   'token1': {
     trainings: [{
-      date: new Date(),
+      date: new Date('2019-05-01'),
       scope: Scope.TEST,
       day: null,
       serie: {
