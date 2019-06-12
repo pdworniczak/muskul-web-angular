@@ -9,7 +9,7 @@ import { ROUTES } from '../../routes/routes.enum';
 
 const sampleLoginResponse: Login = {
   logged: true,
-  token: 'token2'
+  token: 'token3'
 };
 
 @Injectable({
