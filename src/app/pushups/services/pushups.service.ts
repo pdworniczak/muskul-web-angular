@@ -76,8 +76,9 @@ export class PushupsService {
           day: training.day + 1,
           serie: pushupsPlan[training.scope][training.day + 1]
         };
-      } else {
-
+      }
+      return {
+        scope: Scope.TEST
       }
     } else {
       return {
