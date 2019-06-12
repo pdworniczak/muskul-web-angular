@@ -44,7 +44,7 @@ export class PushupsService {
     return of(previouseTraining).pipe(delay(1000));
   }
 
-  getCurrentPushupTrainingPlan(token: string): Observable<Plan | TestPlan> {
+  getPushupsTrainingPlan(token: string): Observable<Plan | TestPlan> {
     return this.getPreviousPushupsTraining(token).pipe(
       map(training => {
         if (!training) {
@@ -56,10 +56,6 @@ export class PushupsService {
         }
       })
     );
-  }
-
-  getPushups(): Array<Training> {
-    return [];
   }
 
   private getTrainingAfterTest(training: Test): Plan {
@@ -74,11 +70,15 @@ export class PushupsService {
 
   private getTraining(training: Training): Plan | TestPlan {
     if (this.isTrainingSucced(training)) {
-      return {
-        scope: training.scope,
-        day: training.day + 1,
-        serie: pushupsPlan[training.scope][training.day + 1]
-      };
+      if (pushupsPlan[training.scope][training.day + 1]) {
+        return {
+          scope: training.scope,
+          day: training.day + 1,
+          serie: pushupsPlan[training.scope][training.day + 1]
+        };
+      } else {
+
+      }
     } else {
       return {
         scope: training.scope,
