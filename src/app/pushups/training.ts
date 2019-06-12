@@ -53,7 +53,7 @@ interface Plan {
 }
 
 interface TestPlan {
-  scope: Scope.TEST
+  scope: Scope
 }
 
 export {
