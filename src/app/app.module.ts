@@ -1,12 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  HAMMER_GESTURE_CONFIG
+} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatInputModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatSliderModule,
+  GestureConfig
 } from '@angular/material';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './users/components/login/login.component';
@@ -39,12 +45,17 @@ import { AddComponent } from './pushups/components/add/add.component';
     }),
     RoutesModule,
     ReactiveFormsModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSliderModule
   ],
-  providers: [UserService],
+  providers: [
+    UserService,
+    { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

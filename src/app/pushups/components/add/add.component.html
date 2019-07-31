@@ -1,10 +1,29 @@
 <article>
-  <h2>
-    add works!
-  </h2>
+  <h1>
+    Training!
+  </h1>
   <section>
-    <h1>Plan</h1>
+    <h2>Plan</h2>
     <div>{{ trainingPlan | json }}</div>
+  </section>
+  <section *ngIf="!loading">
+    <div *ngIf="trainingPlan.scope === scope.TEST; then test; else training">
+      a
+    </div>
+    <ng-template #test>
+      <h2>{{ trainingPlan.scope }}</h2>
+      <div>
+        Count:
+        <mat-slider min="1" max="200" [(value)]="value" thumbLabel></mat-slider>
+        <span>{{ value }}</span>
+      </div>
+    </ng-template>
+    <ng-template #training>
+      <h2>
+        {{ trainingPlan.scope }} day: {{ trainingPlan.scope }}
+      </h2>
+    </ng-template>
+    <button mat-button arise (click)="save()">Save</button>
   </section>
   <a routerLink="/app">app</a>
 </article>

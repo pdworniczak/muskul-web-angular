@@ -8,6 +8,7 @@ import {
   Test,
   Plan,
   TestPlan,
+  SerieTest,
   Serie3Day,
   Serie5Day
 } from '../training';
@@ -58,6 +59,13 @@ export class PushupsService {
     );
   }
 
+  saveTraining(token: string, training: Training | Test): void {
+    if (!mockData[token]) {
+      mockData[token] = { trainings: [] };
+    }
+    mockData[token].trainings.push(training);
+  }
+
   private getTrainingAfterTest(training: Test): Plan {
     const [scope, trainingWeek] = this.findScopePlan(training.serie.count);
 
@@ -79,7 +87,7 @@ export class PushupsService {
       }
       return {
         scope: Scope.TEST
-      }
+      };
     } else {
       return {
         scope: training.scope,
@@ -104,16 +112,17 @@ export class PushupsService {
   private findScopePlan(
     score: number
   ): [Scope, { [day: number]: Serie3Day | Serie5Day }] {
+    console.log(pushupsPlan);
     const [scopeValue, trainingWeek] = Object.entries(pushupsPlan).find(
       ([scopeValue, trainingWeek]) => {
         const [low, high] = scopeValue.split('-');
+
+        console.log(scopeValue, low, high, score < +high && score > +low);
 
         return score < +high && score > +low;
       }
     );
 
-    const scope = Object.entries(Scope).find(([key, val]) => scopeValue === val)[0];
-
-    return [Scope[scope], trainingWeek];
+    return [Scope[scopeValue], trainingWeek];
   }
 }
