@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { PushupsService } from '../../services/pushups.service';
 import { StorageService } from 'src/app/common/services/storage.service';
 import { Scope } from '../../training';
-import { cpus } from 'os';
+import { ROUTES } from '../../../routes/routes.enum';
 
 @Component({
   selector: 'muskul-add',
@@ -19,7 +21,8 @@ export class AddComponent implements OnInit {
 
   constructor(
     private pushupsService: PushupsService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -39,5 +42,7 @@ export class AddComponent implements OnInit {
       day,
       serie
     });
+
+    this.router.navigate([ROUTES.APP]);
   }
 }

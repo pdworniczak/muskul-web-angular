@@ -14,6 +14,7 @@ import {
 } from '../training';
 import pushupsPlan from '../pushups.json';
 import { mockData } from './mock.pushups';
+import { transition } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class PushupsService {
   }
 
   getAllPushupsTrainings(token: string): Observable<Array<Training | Test>> {
-    return of(mockData[token].trainings).pipe(delay(1000));
+    return of(this.getDataOrCreate(token).trainings).pipe(delay(1000));
   }
 
   getPreviousPushupsTraining(token: string): Observable<Training | Test> {
@@ -112,7 +113,6 @@ export class PushupsService {
   private findScopePlan(
     score: number
   ): [Scope, { [day: number]: Serie3Day | Serie5Day }] {
-    console.log(pushupsPlan);
     const [scopeValue, trainingWeek] = Object.entries(pushupsPlan).find(
       ([scopeValue, trainingWeek]) => {
         const [low, high] = scopeValue.split('-');
@@ -124,5 +124,14 @@ export class PushupsService {
     );
 
     return [Scope[scopeValue], trainingWeek];
+  }
+
+  private getDataOrCreate(token: string): any {
+    let data = mockData[token];
+    if (!data) {
+      data = { trainings: [] };
+      mockData[token] = { ...data };
+    }
+    return data;
   }
 }
