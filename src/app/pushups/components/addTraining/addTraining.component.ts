@@ -1,5 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Training, Serie3Day, Serie5Day } from '../../training';
+import { PushupsService } from '../../services/pushups.service';
+import { StorageService } from 'src/app/common/services/storage.service';
+import { Router } from '@angular/router';
+import { ROUTES } from 'src/app/routes/routes.enum';
 
 enum State {
   IN_PROGRES,
@@ -19,6 +23,8 @@ export class AddTrainingComponent {
 
   value: Serie3Day | Serie5Day;
   lastSerie: number;
+
+  constructor(private pushupsService: PushupsService, private storegeService: StorageService, private router: Router) {}
 
   ngOnInit() {
     this.value =
@@ -47,9 +53,15 @@ export class AddTrainingComponent {
 
   save() {
     if (this.state == State.IN_PROGRES) {
+      this.pushupsService.saveTraining(this.storegeService.getUserToken(), {
+        date: new Date(),
+        day: this.trainingPlan.day,
+        scope: this.trainingPlan.scope,
+        serie: this.value
+      });
       this.state = State.SUCCESS;
+      this.router.navigate([ROUTES.APP]);
     }
-    console.log('save', this.value);
   }
 
   inc(serieNo: number) {
