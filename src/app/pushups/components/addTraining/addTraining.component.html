@@ -1,9 +1,26 @@
-<div>Training!! {{ trainingPlan.scope }} !</div>
-<!-- <h2>
-    {{ trainingPlan.scope | json }}
-  </h2>
-  <ul>
-    <li *ngFor="let s of trainingPlan.serie | keyvalue" >
-      Day: {{ s['key'] }} <span>s['value']<button mat-raised-button>+</button><button mat-raised-button>-</button></span>
+<h2>
+  {{ trainingPlan.scope }}
+</h2>
+<ul>
+  <span *ngFor="let serie of trainingPlan.serie | keyvalue">
+    <li *ngIf="currentSerie >= serie['key']">
+      Serie: {{ serie['key'] }}
+      <div *ngIf="isSaved(); then saved; else progress;"></div>
+      <div>
+        <ng-template #progress>
+          <button mat-raised-button *ngIf="currentSerie == serie['key']" (click)="inc(serie['key'])">+</button>
+          {{ value[serie['key']] }}
+          <button mat-raised-button *ngIf="currentSerie == serie['key']" (click)="dec(serie['key'])">-</button>
+        </ng-template>
+        <ng-template #saved>
+          {{ value[serie['key']] }}
+        </ng-template>
+      </div>
+
+      <button mat-raised-button *ngIf="currentSerie == serie['key'] && currentSerie != lastSerie && !isSaved()"
+        (click)="nextSerie()">Next</button>
     </li>
-  </ul> -->
+  </span>
+  <button mat-raised-button *ngIf="currentSerie == lastSerie && !isSaved()" (click)="save()">Save</button>
+  <h3 *ngIf="isSaved()">{{ getResult() }}</h3>
+</ul>

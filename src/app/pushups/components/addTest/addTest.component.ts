@@ -11,7 +11,7 @@ import { ROUTES } from 'src/app/routes/routes.enum';
 })
 export class AddTestComponent {
 
-  token = this.storageService.getUserToken();
+  private token = this.storageService.getUserToken();
   value = 0;
 
   constructor(private pushupsService: PushupsService, private storageService: StorageService, private router: Router) {}
