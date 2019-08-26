@@ -68,6 +68,7 @@ export class PushupsService {
   }
 
   private getTrainingAfterTest(training: Test): Plan {
+    const scopePlan = this.findScopePlan(training.serie.count);
     const [scope, trainingWeek] = this.findScopePlan(training.serie.count);
 
     return {
@@ -114,16 +115,14 @@ export class PushupsService {
     score: number
   ): [Scope, { [day: number]: Serie3Day | Serie5Day }] {
     const [scopeValue, trainingWeek] = Object.entries(pushupsPlan).find(
-      ([scopeValue, trainingWeek]) => {
+      ([scopeValue]) => {
         const [low, high] = scopeValue.split('-');
-
-        console.log(scopeValue, low, high, score < +high && score > +low);
 
         return score < +high && score > +low;
       }
     );
 
-    return [Scope[scopeValue], trainingWeek];
+    return [Scope[Object.entries(Scope).find(([key, value]) => value === scopeValue)[0]], trainingWeek];
   }
 
   private getDataOrCreate(token: string): any {

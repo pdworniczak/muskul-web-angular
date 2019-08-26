@@ -26,6 +26,8 @@ import { CommingSoonComponent } from './common/components/comming-soon/comming-s
 import { PageNotFoundComponent } from './common/components/page-not-found/page-not-found.component';
 import { LoaderComponent } from './common/components/loader/loader.component';
 import { AddComponent } from './pushups/components/add/add.component';
+import { AddTestComponent } from './pushups/components/addTest/addTest.component';
+import { AddTrainingComponent } from './pushups/components/addTraining/addTraining.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { AddComponent } from './pushups/components/add/add.component';
     CommingSoonComponent,
     PageNotFoundComponent,
     LoaderComponent,
-    AddComponent
+    AddComponent,
+    AddTestComponent,
+    AddTrainingComponent
   ],
   imports: [
     BrowserModule,

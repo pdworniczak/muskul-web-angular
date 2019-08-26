@@ -8,22 +8,15 @@
   </section>
   <section *ngIf="!loading">
     <div *ngIf="trainingPlan.scope === scope.TEST; then test; else training">
-      a
+      load
     </div>
     <ng-template #test>
-      <h2>{{ trainingPlan.scope }}</h2>
-      <div>
-        Count:
-        <mat-slider min="1" max="200" [(value)]="value" thumbLabel></mat-slider>
-        <span>{{ value }}</span>
-      </div>
+      <muskul-add-test></muskul-add-test>
     </ng-template>
+    Scope {{ trainingPlan.scope }}  
     <ng-template #training>
-      <h2>
-        {{ trainingPlan.scope }} day: {{ trainingPlan.scope }}
-      </h2>
+      <muskul-add-training [scope]="trainingPlan.scope"></muskul-add-training>
     </ng-template>
-    <button mat-button arise (click)="save()">Save</button>
   </section>
   <a routerLink="/app">app</a>
 </article>
