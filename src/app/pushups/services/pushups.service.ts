@@ -68,7 +68,6 @@ export class PushupsService {
   }
 
   private getTrainingAfterTest(training: Test): Plan {
-    const scopePlan = this.findScopePlan(training.serie.count);
     const [scope, trainingWeek] = this.findScopePlan(training.serie.count);
 
     return {
@@ -118,7 +117,7 @@ export class PushupsService {
       ([scopeValue]) => {
         const [low, high] = scopeValue.split('-');
 
-        return score < +high && score > +low;
+        return score <= +high && score >= +low;
       }
     );
 

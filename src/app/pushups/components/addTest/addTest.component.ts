@@ -24,6 +24,6 @@ export class AddTestComponent {
       serie: { count: this.value }
     });
 
-    // this.router.navigate([ROUTES.APP]);
+    this.router.navigate([ROUTES.APP]);
   }
 }

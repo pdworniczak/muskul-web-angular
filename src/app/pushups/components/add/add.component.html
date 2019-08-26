@@ -13,9 +13,8 @@
     <ng-template #test>
       <muskul-add-test></muskul-add-test>
     </ng-template>
-    Scope {{ trainingPlan.scope }}  
     <ng-template #training>
-      <muskul-add-training [scope]="trainingPlan.scope"></muskul-add-training>
+      <muskul-add-training [trainingPlan]="trainingPlan"></muskul-add-training>
     </ng-template>
   </section>
   <a routerLink="/app">app</a>
