@@ -67,6 +67,14 @@ export class PushupsService {
     mockData[token].trainings.push(training);
   }
 
+  removeTraining(token: string, training: Training | Test): void {
+    const trainingToRemove = mockData[token].trainings.find(
+      data => training.date === data.date
+    );
+    const index = mockData[token].trainings.indexOf(trainingToRemove);
+    mockData[token].trainings.splice(index, 1);
+  }
+
   private getTrainingAfterTest(training: Test): Plan {
     const [scope, trainingWeek] = this.findScopePlan(training.serie.count);
 
@@ -121,7 +129,12 @@ export class PushupsService {
       }
     );
 
-    return [Scope[Object.entries(Scope).find(([key, value]) => value === scopeValue)[0]], trainingWeek];
+    return [
+      Scope[
+        Object.entries(Scope).find(([key, value]) => value === scopeValue)[0]
+      ],
+      trainingWeek
+    ];
   }
 
   private getDataOrCreate(token: string): any {
