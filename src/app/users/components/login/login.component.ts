@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { auth } from 'firebase';
 
-import { UserService } from '../../services/user.service';
-import { ROUTES } from '../../../routes/routes.enum';
+import { AuthenticationService } from '../../services/authentication.firebase.service';
+import { ROUTES } from 'src/app/routes/routes.enum';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +13,9 @@ import { ROUTES } from '../../../routes/routes.enum';
 })
 export class LoginComponent {
   constructor(
-    private userService: UserService,
-    private formBuilder: FormBuilder
+    private authenticationService: AuthenticationService,
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
 
   loading = false;
@@ -24,7 +27,24 @@ export class LoginComponent {
 
   login() {
     this.loading = true;
-    this.userService.login();
+    this.authenticationService
+      .login(
+        this.loginForm.get('email').value,
+        this.loginForm.get('password').value
+      )
+      .subscribe({
+        next: (data: auth.UserCredential) => {
+          console.log(data.additionalUserInfo);
+        },
+        error: err => {
+          this.loading = false;
+          console.error('something wrong occurred: ' + err);
+        },
+        complete: () => {
+          console.log('complete');
+          this.router.navigate([`/${ROUTES.APP}`]);
+        }
+      });
   }
 
   register() {

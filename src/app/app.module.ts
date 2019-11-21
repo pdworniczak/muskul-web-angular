@@ -20,6 +20,7 @@ import { ListComponent } from './pushups/components/list/list.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { UserService } from './users/services/user.service';
+import { AuthenticationService } from './users/services/authentication.firebase.service';
 import { NavigationComponent } from './routes/components/navigation/navigation.component';
 import RoutesModule from './routes/routes';
 import { CommingSoonComponent } from './common/components/comming-soon/comming-soon.component';
@@ -58,6 +59,7 @@ import { AddTrainingComponent } from './pushups/components/addTraining/addTraini
   ],
   providers: [
     UserService,
+    AuthenticationService,
     { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig }
   ],
   bootstrap: [AppComponent]
