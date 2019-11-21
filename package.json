@@ -28,6 +28,8 @@
     "@angular/router": "~7.2.0",
     "@angular/service-worker": "~7.2.0",
     "core-js": "^2.5.4",
+    "firebase": "^7.4.0",
+    "firebase-tools": "^7.8.1",
     "j": "^1.0.0",
     "moment": "^2.24.0",
     "node-sass": "^4.13.0",

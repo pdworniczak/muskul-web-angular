@@ -46,3 +46,8 @@ Thumbs.db
 # vagrant files
 
 .vagrant
+
+#firebase
+
+.firebase
+.firebaserc
