@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 0.0.0.0 --poll 1",
+    "start": "ng serve --host 0.0.0.0",
     "build": "ng build",
     "test": "jest --watch",
     "lint": "ng lint",
@@ -30,6 +30,7 @@
     "core-js": "^2.5.4",
     "j": "^1.0.0",
     "moment": "^2.24.0",
+    "node-sass": "^4.13.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
