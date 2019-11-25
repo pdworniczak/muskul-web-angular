@@ -28,7 +28,7 @@ export class PushupsService {
   }
 
   getAllPushupsTrainings(): Observable<Array<Training | Test>> {
-    return of(this.getDataOrCreate().trainings).pipe(delay(1000));
+    return of(this.data);
   }
 
   getPreviousPushupsTraining(): Observable<Training | Test> {
@@ -44,7 +44,7 @@ export class PushupsService {
         }, null)
       : null;
 
-    return of(previouseTraining).pipe(delay(1000));
+    return of(previouseTraining);
   }
 
   getPushupsTrainingPlan(): Observable<Plan | TestPlan> {
@@ -63,7 +63,7 @@ export class PushupsService {
 
   saveTraining(training: Training | Test): void {
     if (training) {
-      firebase.database()
+      this.data.push(training);
     }
   }
 
@@ -135,13 +135,5 @@ export class PushupsService {
       ],
       trainingWeek
     ];
-  }
-
-  private getDataOrCreate(): any {
-    let data = this.data;
-    if (!data) {
-      data = [];
-    }
-    return data;
   }
 }

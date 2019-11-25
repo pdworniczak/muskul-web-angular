@@ -5,7 +5,7 @@
   <section>
     <div *ngFor="let pushup of pushups; let i = index" [ngStyle]="{ 'color': pushupsService.isTrainingSucced(pushup) ? 'green' : 'red' }">
       {{ i+1 }} {{ pushup.date | date }} {{ pushup.scope }} {{ pushup.serie | json }}
-      <button mat-raised-button (click)="remove(pushup)">remove</button>
+      <button mat-raised-button (click)="remove(pushup)" disabled="true">remove</button>
     </div>
   </section>
   <a routerLink="/app">app</a>
