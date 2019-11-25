@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { PushupsService } from 'src/app/pushups/services/pushups.service';
-import { StorageService } from 'src/app/common/services/storage.service';
+import { UserService } from 'src/app/users/services/user.firebase.service';
 import { Scope } from '../../training';
 
 @Component({
@@ -15,11 +15,11 @@ export class AddComponent implements OnInit {
   loading = true;
   trainingPlan = null;
   training = {};
-  token = this.storageService.getUserToken();
+  token = this.userService.getUid();
 
   constructor(
     private pushupsService: PushupsService,
-    private storageService: StorageService,
+    private userService: UserService,
     private router: Router
   ) {}
 

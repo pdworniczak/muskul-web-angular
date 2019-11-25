@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { auth } from 'firebase';
 
-import { AuthenticationService } from '../../services/authentication.firebase.service';
+import { UserService } from '../../services/user.firebase.service';
 import { ROUTES } from 'src/app/routes/routes.enum';
 
 @Component({
@@ -13,7 +13,7 @@ import { ROUTES } from 'src/app/routes/routes.enum';
 })
 export class LoginComponent {
   constructor(
-    private authenticationService: AuthenticationService,
+    private userService: UserService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {}
@@ -27,7 +27,7 @@ export class LoginComponent {
 
   login() {
     this.loading = true;
-    this.authenticationService
+    this.userService
       .login(
         this.loginForm.get('email').value,
         this.loginForm.get('password').value

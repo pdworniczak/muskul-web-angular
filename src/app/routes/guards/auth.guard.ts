@@ -7,22 +7,20 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { AuthenticationService } from '../../users/services/authentication.firebase.service';
+import { UserService } from '../../users/services/user.firebase.service';
 import { ROUTES } from '../routes.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private userService: AuthenticationService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
     const isAuthenticated = this.userService.isAuthenticated();
-
-    console.log('can activate?', isAuthenticated);
 
     if (!isAuthenticated) {
       this.router.navigate([ROUTES.LOGIN]);

@@ -7,7 +7,7 @@ import firebase from '../../../firebase';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class UserService {
   constructor(private router: Router) { }
 
   login(email: string, password: string) {
@@ -15,11 +15,15 @@ export class AuthenticationService {
   }
 
   logout() {
-    // this.storageService.logout();
+    firebase.auth().signOut();
     this.router.navigate(['/']);
   }
 
-  isAuthenticated() {
+  isAuthenticated(): boolean {
     return firebase.auth().currentUser !== null;
+  }
+
+  getUid(): string {
+    return firebase.auth().currentUser.uid;
   }
 }

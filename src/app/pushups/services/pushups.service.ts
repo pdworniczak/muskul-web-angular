@@ -8,13 +8,11 @@ import {
   Test,
   Plan,
   TestPlan,
-  SerieTest,
   Serie3Day,
   Serie5Day
 } from '../training';
 import pushupsPlan from '../pushups.json';
 import { mockData } from './mock.pushups';
-import { transition } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
