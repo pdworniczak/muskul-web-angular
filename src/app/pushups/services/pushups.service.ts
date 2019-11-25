@@ -1,25 +1,16 @@
 import { Injectable, SystemJsNgModuleLoader } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { Observable, of, from } from 'rxjs';
+import { map } from 'rxjs/operators';
 import firebase from 'src/firebase';
 
-import {
-  Training,
-  Scope,
-  Test,
-  Plan,
-  TestPlan,
-  Serie3Day,
-  Serie5Day
-} from '../training';
+import { Training, Scope, Test, Plan, TestPlan, Serie3Day, Serie5Day } from '../training';
 import pushupsPlan from '../pushups.json';
-// import { mockData } from './mock.pushups';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PushupsService {
-  private data: Array<Training|Test> = [];
+  private data: Array<Training | Test> = [];
 
   constructor() {}
 
@@ -28,16 +19,30 @@ export class PushupsService {
   }
 
   getAllPushupsTrainings(): Observable<Array<Training | Test>> {
-    return of(this.data);
+    return from(
+      firebase
+        .firestore()
+        .collection('pushups')
+        .where('uid', '==', firebase.auth().currentUser.uid)
+        .get()
+        .then(training => {
+          const trainings: Array<Training | Test> = [];
+
+          training.forEach(doc => {
+            const { date, day, scope, serie } = doc.data();
+            trainings.push({ date: date.seconds, day, scope, serie });
+          });
+
+          return trainings;
+        })
+    );
   }
 
   getPreviousPushupsTraining(): Observable<Training | Test> {
     const previouseTraining = this.data
       ? this.data.reduce((latestTraining, training) => {
           if (latestTraining) {
-            return training.date > latestTraining.date
-              ? training
-              : latestTraining;
+            return training.date > latestTraining.date ? training : latestTraining;
           }
 
           return training;
@@ -64,13 +69,15 @@ export class PushupsService {
   saveTraining(training: Training | Test): void {
     if (training) {
       this.data.push(training);
+      firebase
+        .firestore()
+        .collection('pushups')
+        .add({ ...training, uid: firebase.auth().currentUser.uid });
     }
   }
 
   removeTraining(training: Training | Test): void {
-    const trainingToRemove = this.data.find(
-      data => training.date === data.date
-    );
+    const trainingToRemove = this.data.find(data => training.date === data.date);
     const index = this.data.indexOf(trainingToRemove);
     this.data.splice(index, 1);
   }
@@ -113,27 +120,16 @@ export class PushupsService {
 
     const plan = pushupsPlan[training.scope][training.day];
 
-    return Object.entries(training.serie).every(
-      ([no, score]) => score >= plan[no]
-    );
+    return Object.entries(training.serie).every(([no, score]) => score >= plan[no]);
   }
 
-  private findScopePlan(
-    score: number
-  ): [Scope, { [day: number]: Serie3Day | Serie5Day }] {
-    const [scopeValue, trainingWeek] = Object.entries(pushupsPlan).find(
-      ([scopeValue]) => {
-        const [low, high] = scopeValue.split('-');
+  private findScopePlan(score: number): [Scope, { [day: number]: Serie3Day | Serie5Day }] {
+    const [scopeValue, trainingWeek] = Object.entries(pushupsPlan).find(([scopeValue]) => {
+      const [low, high] = scopeValue.split('-');
 
-        return score <= +high && score >= +low;
-      }
-    );
+      return score <= +high && score >= +low;
+    });
 
-    return [
-      Scope[
-        Object.entries(Scope).find(([key, value]) => value === scopeValue)[0]
-      ],
-      trainingWeek
-    ];
+    return [Scope[Object.entries(Scope).find(([key, value]) => value === scopeValue)[0]], trainingWeek];
   }
 }

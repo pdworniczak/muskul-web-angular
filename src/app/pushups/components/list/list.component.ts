@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { PushupsService } from '../../services/pushups.service';
-import { StorageService } from 'src/app/common/services/storage.service';
 import { Scope, Test, Training } from '../../training';
 
 @Component({
@@ -14,8 +13,7 @@ export class ListComponent implements OnInit {
   Scope = Scope;
 
   constructor(
-    private pushupsService: PushupsService,
-    private storageService: StorageService
+    private pushupsService: PushupsService
   ) {}
 
   ngOnInit() {

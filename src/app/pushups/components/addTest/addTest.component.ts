@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { PushupsService } from 'src/app/pushups/services/pushups.service';
-import { StorageService } from 'src/app/common/services/storage.service';
 import { Scope } from '../../training';
 import { Router } from '@angular/router';
 import { ROUTES } from 'src/app/routes/routes.enum';
@@ -12,7 +11,7 @@ import { ROUTES } from 'src/app/routes/routes.enum';
 export class AddTestComponent {
   value = 0;
 
-  constructor(private pushupsService: PushupsService, private storageService: StorageService, private router: Router) {}
+  constructor(private pushupsService: PushupsService, private router: Router) {}
 
   save() {
     this.pushupsService.saveTraining({

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { PushupsService } from 'src/app/pushups/services/pushups.service';
-import { UserService } from 'src/app/users/services/user.firebase.service';
 import { Scope } from '../../training';
 
 @Component({
@@ -18,8 +16,6 @@ export class AddComponent implements OnInit {
 
   constructor(
     private pushupsService: PushupsService,
-    private userService: UserService,
-    private router: Router
   ) {}
 
   ngOnInit() {
