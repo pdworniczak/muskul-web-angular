@@ -20,6 +20,6 @@ export class AuthenticationService {
   }
 
   isAuthenticated() {
-    // return this.storageService.getUserToken() !== null;
+    return firebase.auth().currentUser !== null;
   }
 }

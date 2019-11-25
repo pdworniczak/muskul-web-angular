@@ -34,15 +34,11 @@ export class LoginComponent {
       )
       .subscribe({
         next: (data: auth.UserCredential) => {
-          console.log(data.additionalUserInfo);
+          this.router.navigate([`/${ROUTES.APP}`]);
         },
         error: err => {
           this.loading = false;
           console.error('something wrong occurred: ' + err);
-        },
-        complete: () => {
-          console.log('complete');
-          this.router.navigate([`/${ROUTES.APP}`]);
         }
       });
   }
