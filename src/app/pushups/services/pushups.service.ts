@@ -1,6 +1,7 @@
 import { Injectable, SystemJsNgModuleLoader } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
+import firebase from 'src/firebase';
 
 import {
   Training,
@@ -12,25 +13,27 @@ import {
   Serie5Day
 } from '../training';
 import pushupsPlan from '../pushups.json';
-import { mockData } from './mock.pushups';
+// import { mockData } from './mock.pushups';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PushupsService {
+  private data: Array<Training|Test> = [];
+
   constructor() {}
 
   getPushupsPlan() {
     return pushupsPlan;
   }
 
-  getAllPushupsTrainings(token: string): Observable<Array<Training | Test>> {
-    return of(this.getDataOrCreate(token).trainings).pipe(delay(1000));
+  getAllPushupsTrainings(): Observable<Array<Training | Test>> {
+    return of(this.getDataOrCreate().trainings).pipe(delay(1000));
   }
 
-  getPreviousPushupsTraining(token: string): Observable<Training | Test> {
-    const previouseTraining = mockData[token]
-      ? mockData[token].trainings.reduce((latestTraining, training) => {
+  getPreviousPushupsTraining(): Observable<Training | Test> {
+    const previouseTraining = this.data
+      ? this.data.reduce((latestTraining, training) => {
           if (latestTraining) {
             return training.date > latestTraining.date
               ? training
@@ -44,8 +47,8 @@ export class PushupsService {
     return of(previouseTraining).pipe(delay(1000));
   }
 
-  getPushupsTrainingPlan(token: string): Observable<Plan | TestPlan> {
-    return this.getPreviousPushupsTraining(token).pipe(
+  getPushupsTrainingPlan(): Observable<Plan | TestPlan> {
+    return this.getPreviousPushupsTraining().pipe(
       map(training => {
         if (!training) {
           return { scope: Scope.TEST };
@@ -58,19 +61,18 @@ export class PushupsService {
     );
   }
 
-  saveTraining(token: string, training: Training | Test): void {
-    if (!mockData[token]) {
-      mockData[token] = { trainings: [] };
+  saveTraining(training: Training | Test): void {
+    if (training) {
+      firebase.database()
     }
-    mockData[token].trainings.push(training);
   }
 
-  removeTraining(token: string, training: Training | Test): void {
-    const trainingToRemove = mockData[token].trainings.find(
+  removeTraining(training: Training | Test): void {
+    const trainingToRemove = this.data.find(
       data => training.date === data.date
     );
-    const index = mockData[token].trainings.indexOf(trainingToRemove);
-    mockData[token].trainings.splice(index, 1);
+    const index = this.data.indexOf(trainingToRemove);
+    this.data.splice(index, 1);
   }
 
   private getTrainingAfterTest(training: Test): Plan {
@@ -135,11 +137,10 @@ export class PushupsService {
     ];
   }
 
-  private getDataOrCreate(token: string): any {
-    let data = mockData[token];
+  private getDataOrCreate(): any {
+    let data = this.data;
     if (!data) {
-      data = { trainings: [] };
-      mockData[token] = { ...data };
+      data = [];
     }
     return data;
   }

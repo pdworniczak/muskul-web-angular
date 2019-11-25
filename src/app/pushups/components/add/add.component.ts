@@ -15,7 +15,6 @@ export class AddComponent implements OnInit {
   loading = true;
   trainingPlan = null;
   training = {};
-  token = this.userService.getUid();
 
   constructor(
     private pushupsService: PushupsService,
@@ -24,7 +23,7 @@ export class AddComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.pushupsService.getPushupsTrainingPlan(this.token).subscribe(plan => {
+    this.pushupsService.getPushupsTrainingPlan().subscribe(plan => {
       this.trainingPlan = plan;
       this.loading = false;
     });

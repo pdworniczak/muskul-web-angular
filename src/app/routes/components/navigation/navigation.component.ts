@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/users/services/user.service';
+import { UserService } from 'src/app/users/services/user.firebase.service';
 
 @Component({
   selector: 'app-navigation',

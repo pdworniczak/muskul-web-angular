@@ -20,11 +20,11 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.pushupsService
-      .getAllPushupsTrainings(this.storageService.getUserToken())
+      .getAllPushupsTrainings()
       .subscribe(pushups => (this.pushups = pushups));
   }
 
   remove(training: Training | Test) {
-    this.pushupsService.removeTraining(this.storageService.getUserToken(), training);
+    this.pushupsService.removeTraining(training);
   }
 }

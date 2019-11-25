@@ -10,14 +10,12 @@ import { ROUTES } from 'src/app/routes/routes.enum';
   templateUrl: './addTest.component.html'
 })
 export class AddTestComponent {
-
-  private token = this.storageService.getUserToken();
   value = 0;
 
   constructor(private pushupsService: PushupsService, private storageService: StorageService, private router: Router) {}
 
   save() {
-    this.pushupsService.saveTraining(this.token, {
+    this.pushupsService.saveTraining({
       date: new Date(),
       scope: Scope.TEST,
       day: 0,

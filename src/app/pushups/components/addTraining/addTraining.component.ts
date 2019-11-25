@@ -53,7 +53,7 @@ export class AddTrainingComponent {
 
   save() {
     if (this.state == State.IN_PROGRES) {
-      this.pushupsService.saveTraining(this.storegeService.getUserToken(), {
+      this.pushupsService.saveTraining({
         date: new Date(),
         day: this.trainingPlan.day,
         scope: this.trainingPlan.scope,

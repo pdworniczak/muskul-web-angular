@@ -21,7 +21,7 @@ describe('PushupsService', () => {
   });
 
   it('get previous training', done => {
-    service.getPreviousPushupsTraining('token1').subscribe(pushupsTraining => {
+    service.getPreviousPushupsTraining().subscribe(pushupsTraining => {
       expect(pushupsTraining).toEqual({
         date: new Date('2019-05-01'),
         scope: Scope.TEST,
@@ -35,7 +35,7 @@ describe('PushupsService', () => {
   });
 
   it('get pushup plan training after test', done => {
-    service.getPushupsTrainingPlan('token1').subscribe(pushupsPlan => {
+    service.getPushupsTrainingPlan().subscribe(pushupsPlan => {
       expect(pushupsPlan).toEqual({
         scope: Scope.SCOPE_11_TO_20,
         day: 1,
@@ -52,7 +52,7 @@ describe('PushupsService', () => {
   });
 
   it('get pushup plan training after success', done => {
-    service.getPushupsTrainingPlan('token2').subscribe(pushupsPlan => {
+    service.getPushupsTrainingPlan().subscribe(pushupsPlan => {
       expect(pushupsPlan).toEqual({
         scope: Scope.SCOPE_21_TO_25,
         day: 3,
@@ -69,7 +69,7 @@ describe('PushupsService', () => {
   });
 
   it('get pushup plan failed training', done => {
-    service.getPushupsTrainingPlan('token3').subscribe(pushupsPlan => {
+    service.getPushupsTrainingPlan().subscribe(pushupsPlan => {
       expect(pushupsPlan).toEqual({
         scope: Scope.SCOPE_21_TO_25,
         day: 1,
@@ -86,7 +86,7 @@ describe('PushupsService', () => {
   });
 
   it('get pushup plan no trainings', done => {
-    service.getPushupsTrainingPlan('token4').subscribe(pushupsPlan => {
+    service.getPushupsTrainingPlan().subscribe(pushupsPlan => {
       expect(pushupsPlan).toEqual({
         scope: Scope.TEST
       });
