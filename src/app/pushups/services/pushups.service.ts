@@ -39,17 +39,40 @@ export class PushupsService {
   }
 
   getPreviousPushupsTraining(): Observable<Training | Test> {
-    const previouseTraining = this.data
-      ? this.data.reduce((latestTraining, training) => {
-          if (latestTraining) {
-            return training.date > latestTraining.date ? training : latestTraining;
-          }
+    // const t = from(
+    return from(
+      firebase
+        .firestore()
+        .collection('pushups')
+        .where('uid', '==', firebase.auth().currentUser.uid)
+        // .orderBy('date')
+        .limit(1)
+        .get()
+        .then(training => {
+          const trainings: Array<Training | Test> = [];
 
-          return training;
-        }, null)
-      : null;
+          training.forEach(doc => {
+            const { date, day, scope, serie } = doc.data();
+            trainings.push({ date: date.seconds, day, scope, serie });
+          });
 
-    return of(previouseTraining);
+          return trainings[0];
+        })
+    );
+
+    // t.subscribe(z => console.log('#', z));
+
+    // const previouseTraining = this.data
+    //   ? this.data.reduce((latestTraining, training) => {
+    //       if (latestTraining) {
+    //         return training.date > latestTraining.date ? training : latestTraining;
+    //       }
+
+    //       return training;
+    //     }, null)
+    //   : null;
+
+    // return of(previouseTraining);
   }
 
   getPushupsTrainingPlan(): Observable<Plan | TestPlan> {
