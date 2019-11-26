@@ -24,13 +24,14 @@ export class PushupsService {
         .firestore()
         .collection('pushups')
         .where('uid', '==', firebase.auth().currentUser.uid)
+        .orderBy('date', 'desc')
         .get()
         .then(training => {
           const trainings: Array<Training | Test> = [];
 
           training.forEach(doc => {
             const { date, day, scope, serie } = doc.data();
-            trainings.push({ date: date.seconds, day, scope, serie });
+            trainings.push({ date: new Date(date.seconds * 1000), day, scope, serie });
           });
 
           return trainings;
@@ -45,7 +46,7 @@ export class PushupsService {
         .firestore()
         .collection('pushups')
         .where('uid', '==', firebase.auth().currentUser.uid)
-        // .orderBy('date')
+        .orderBy('date', 'desc')
         .limit(1)
         .get()
         .then(training => {
@@ -53,26 +54,12 @@ export class PushupsService {
 
           training.forEach(doc => {
             const { date, day, scope, serie } = doc.data();
-            trainings.push({ date: date.seconds, day, scope, serie });
+            trainings.push({ date: new Date(date.seconds * 1000), day, scope, serie });
           });
 
           return trainings[0];
         })
     );
-
-    // t.subscribe(z => console.log('#', z));
-
-    // const previouseTraining = this.data
-    //   ? this.data.reduce((latestTraining, training) => {
-    //       if (latestTraining) {
-    //         return training.date > latestTraining.date ? training : latestTraining;
-    //       }
-
-    //       return training;
-    //     }, null)
-    //   : null;
-
-    // return of(previouseTraining);
   }
 
   getPushupsTrainingPlan(): Observable<Plan | TestPlan> {
