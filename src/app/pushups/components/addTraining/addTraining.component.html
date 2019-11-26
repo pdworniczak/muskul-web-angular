@@ -11,6 +11,7 @@
           <button mat-raised-button *ngIf="currentSerie == serie['key']" (click)="inc(serie['key'])">+</button>
           {{ value[serie['key']] }}
           <button mat-raised-button *ngIf="currentSerie == serie['key']" (click)="dec(serie['key'])">-</button>
+          <div *ngIf="currentSerie == serie['key']">{{ timer }}</div>
         </ng-template>
         <ng-template #saved>
           {{ value[serie['key']] }}

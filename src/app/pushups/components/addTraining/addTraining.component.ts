@@ -23,6 +23,8 @@ export class AddTrainingComponent {
 
   value: Serie3Day | Serie5Day;
   lastSerie: number;
+  timer: number = 0;
+  timerInterval;
 
   constructor(private pushupsService: PushupsService, private storegeService: StorageService, private router: Router) {}
 
@@ -34,15 +36,16 @@ export class AddTrainingComponent {
     this.lastSerie = Object.keys(this.trainingPlan.serie).length;
   }
 
+  onDestroy() {
+    console.log('destroy');
+    this.resetTimer();
+  }
+
   nextSerie() {
-    if (
-      this.value[this.currentSerie] >=
-        this.trainingPlan.serie[this.currentSerie] &&
-      this.state != State.FAILED
-    ) {
-      this.value[++this.currentSerie] = this.trainingPlan.serie[
-        this.currentSerie
-      ];
+    this.resetTimer();
+    if (this.value[this.currentSerie] >= this.trainingPlan.serie[this.currentSerie] && this.state != State.FAILED) {
+      this.value[++this.currentSerie] = this.trainingPlan.serie[this.currentSerie];
+      this.runTimer();
     } else {
       if (this.state === State.IN_PROGRES) {
         this.save();
@@ -77,8 +80,15 @@ export class AddTrainingComponent {
   }
 
   getResult() {
-    return `Training ${State[
-      this.state
-    ].toLocaleLowerCase()} Result: ${JSON.stringify(this.value)}`;
+    return `Training ${State[this.state].toLocaleLowerCase()} Result: ${JSON.stringify(this.value)}`;
+  }
+
+  runTimer() {
+    this.timerInterval = setInterval(() => (this.timer += 1), 1000);
+  }
+
+  resetTimer() {
+    clearInterval(this.timerInterval);
+    this.timer = 0;
   }
 }
