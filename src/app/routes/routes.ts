@@ -48,4 +48,6 @@ const routes: Routes = [
   }
 ];
 
-export default RouterModule.forRoot(routes);
+const Routers = RouterModule.forRoot(routes);
+
+export { Routers }

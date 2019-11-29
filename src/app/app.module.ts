@@ -21,7 +21,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { UserService } from './users/services/user.firebase.service';
 import { NavigationComponent } from './routes/components/navigation/navigation.component';
-import RoutesModule from './routes/routes';
+import { Routers } from './routes/routes';
 import { CommingSoonComponent } from './common/components/comming-soon/comming-soon.component';
 import { PageNotFoundComponent } from './common/components/page-not-found/page-not-found.component';
 import { LoaderComponent } from './common/components/loader/loader.component';
@@ -47,7 +47,7 @@ import { AddTrainingComponent } from './pushups/components/addTraining/addTraini
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
     }),
-    RoutesModule,
+    Routers,
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,

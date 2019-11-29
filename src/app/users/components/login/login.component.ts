@@ -19,6 +19,8 @@ export class LoginComponent {
   ) {}
 
   loading = false;
+  error = false;
+  errorMessage = '';
 
   loginForm = this.formBuilder.group({
     email: ['', Validators.compose([Validators.email, Validators.required])],
@@ -38,7 +40,8 @@ export class LoginComponent {
         },
         error: err => {
           this.loading = false;
-          console.error('something wrong occurred: ' + err);
+          this.error = true;
+          this.errorMessage = err;
         }
       });
   }

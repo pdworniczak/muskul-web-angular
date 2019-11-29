@@ -9,8 +9,8 @@
     <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Login</button>
   </form>
   <button mat-raised-button (click)="register()" disabled>Register</button>
-  {{ loginForm.value | json }}
-  {{ loginForm.valid }}
-  {{ loginForm.status }}
+  <div *ngIf="error">
+    <span>{{ errorMessage }}</span>
+  </div>
   <muskul-loading *ngIf="loading"></muskul-loading>
 </section>

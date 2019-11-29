@@ -52,3 +52,6 @@ Thumbs.db
 .firebase
 .firebaserc
 firebaseConfig.json
+
+#logs
+*.log
