@@ -4,7 +4,7 @@
   </h1>
   <section>
     <h2>Plan</h2>
-    <div>{{ trainingPlan | json }}</div>
+    <div *ngIf="trainingPlan">{{ trainingPlan | json }}</div>
   </section>
   <section *ngIf="!loading">
     <div *ngIf="trainingPlan.scope === scope.TEST; then test; else training">
@@ -17,5 +17,6 @@
       <muskul-add-training [trainingPlan]="trainingPlan"></muskul-add-training>
     </ng-template>
   </section>
+  <muskul-loading *ngIf="loading"></muskul-loading>
   <a routerLink="/app">app</a>
 </article>

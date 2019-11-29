@@ -14,9 +14,7 @@ export class AddComponent implements OnInit {
   trainingPlan = null;
   training = {};
 
-  constructor(
-    private pushupsService: PushupsService,
-  ) {}
+  constructor(private pushupsService: PushupsService) {}
 
   ngOnInit() {
     this.pushupsService.getPushupsTrainingPlan().subscribe(plan => {

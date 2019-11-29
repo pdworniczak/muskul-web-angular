@@ -11,15 +11,15 @@ import { Scope, Test, Training } from '../../training';
 export class ListComponent implements OnInit {
   pushups = [];
   Scope = Scope;
+  loading = true;
 
-  constructor(
-    private pushupsService: PushupsService
-  ) {}
+  constructor(private pushupsService: PushupsService) {}
 
   ngOnInit() {
-    this.pushupsService
-      .getAllPushupsTrainings()
-      .subscribe(pushups => (this.pushups = pushups));
+    this.pushupsService.getAllPushupsTrainings().subscribe(pushups => {
+      this.pushups = pushups;
+      this.loading = false;
+    });
   }
 
   remove(training: Training | Test) {
