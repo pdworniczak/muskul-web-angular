@@ -1,4 +1,7 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+
 import firebaseConfig from 'firebaseConfig.json';
 import firebaseConfigDev from 'firebaseConfig.dev.json';
 import { environment } from './environments/environment';

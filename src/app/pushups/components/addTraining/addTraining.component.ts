@@ -37,7 +37,6 @@ export class AddTrainingComponent {
   }
 
   onDestroy() {
-    console.log('destroy');
     this.resetTimer();
   }
 

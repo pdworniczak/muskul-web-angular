@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { auth } from 'firebase';
 
 import { UserService } from '../../services/user.firebase.service';
 import { ROUTES } from 'src/app/routes/routes.enum';
@@ -12,11 +11,7 @@ import { ROUTES } from 'src/app/routes/routes.enum';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  constructor(
-    private userService: UserService,
-    private formBuilder: FormBuilder,
-    private router: Router
-  ) {}
+  constructor(private userService: UserService, private formBuilder: FormBuilder, private router: Router) {}
 
   loading = false;
   error = false;
@@ -29,21 +24,16 @@ export class LoginComponent {
 
   login() {
     this.loading = true;
-    this.userService
-      .login(
-        this.loginForm.get('email').value,
-        this.loginForm.get('password').value
-      )
-      .subscribe({
-        next: (data: auth.UserCredential) => {
-          this.router.navigate([`/${ROUTES.APP}`]);
-        },
-        error: err => {
-          this.loading = false;
-          this.error = true;
-          this.errorMessage = err;
-        }
-      });
+    this.userService.login(this.loginForm.get('email').value, this.loginForm.get('password').value).subscribe({
+      next: () => {
+        this.router.navigate([`/${ROUTES.APP}`]);
+      },
+      error: err => {
+        this.loading = false;
+        this.error = true;
+        this.errorMessage = err;
+      }
+    });
   }
 
   register() {
