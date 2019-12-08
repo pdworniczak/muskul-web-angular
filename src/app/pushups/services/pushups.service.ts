@@ -40,7 +40,6 @@ export class PushupsService {
   }
 
   getPreviousPushupsTraining(): Observable<Training | Test> {
-    // const t = from(
     return from(
       firebase
         .firestore()
@@ -137,6 +136,7 @@ export class PushupsService {
     const [scopeValue, trainingWeek] = Object.entries(pushupsPlan).find(([scopeValue]) => {
       const [low, high] = scopeValue.split('-');
 
+      console.log(low, high, score <= +high, score >= +low, score <= +high && score >= +low);
       return score <= +high && score >= +low;
     });
 

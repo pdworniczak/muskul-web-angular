@@ -9,7 +9,7 @@ enum Scope {
   SCOPE_36_TO_40 = '36-40',
   SCOPE_41_TO_45 = '41-45',
   SCOPE_46_TO_50 = '46-50',
-  SCOPE_51_TO_50 = '51-50',
+  SCOPE_51_TO_55 = '51-55',
   SCOPE_56_TO_60 = '56-60',
   SCOPE_60_TO_100 = '60-100'
 }
